@@ -2,6 +2,10 @@
 
 DeGeo PHP Libraries, Functions and Experiments.
 
+## Coming Soon
+
+ - Hosts Library: Hosts Management Library for CDN integration.
+
 ## Libraries
 
  - Queue: Queue and prioritize data.
