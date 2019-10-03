@@ -105,6 +105,16 @@ class Queue {
 		$this->_sort_queue();
 	} // function
 
+	/**
+	 * Empty
+	 * Empty all data in the Queue
+	 * @return Void
+	 */
+	public function empty()
+	{
+		$this->queue = array();
+	} // function
+
 	public function get_queue( $sort = TRUE )
 	{
 		if( $sort === TRUE )
