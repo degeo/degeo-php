@@ -115,10 +115,10 @@ class Queue {
 		$this->queue = array();
 	} // function
 
-	public function get_queue( $sort = TRUE )
+	public function get_queue( $sort = TRUE, $reversed = FALSE )
 	{
 		if( $sort === TRUE )
-			$this->_sort_queue();
+			$this->_sort_queue( $reversed );
 
 		return $this->queue;
 	} // function
@@ -128,9 +128,13 @@ class Queue {
 	 * Sorts the Queue following the Position identifier
 	 * @return Void
 	 */
-	protected function _sort_queue()
+	protected function _sort_queue( $reversed = FALSE )
 	{
-		uasort( $this->queue, array( &$this, '_sort_compare_position_identifier' ) );
+		if( $reversed === TRUE ):
+			uasort( $this->queue, array( &$this, '_sort_compare_reversed_position_identifier' ) );
+		else:
+			uasort( $this->queue, array( &$this, '_sort_compare_position_identifier' ) );
+		endif;
 	} // function
 
 	/**
@@ -147,6 +151,22 @@ class Queue {
 		endif;
 
 		return ( $a[ $this->position_identifier ] < $b[ $this->position_identifier ] ) ? 0 : 1 ;
+	} // function
+
+	/**
+	 * Sort Comparison Function
+	 * Used by `usort` and `uasort`
+	 * @param Array $a
+	 * @param Array $b
+	 * @return Integer
+	 */
+	private function _sort_compare_reversed_position_identifier( $a, $b )
+	{
+		if( empty( $this->position_identifier ) ):
+			throw new \Exception( 'File Identifier not set in ' . __CLASS__ );
+		endif;
+
+		return ( $a[ $this->position_identifier ] > $b[ $this->position_identifier ] ) ? 0 : 1 ;
 	} // function
 
 } // class
