@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.0.5] - 2019-10-20
+### Added
+ - Queue Library example
+ - Messages Queue Library example
+ - Hosts Library example
+ - Queue Library can now reverse sort the queue
+### Changed
+ - Hosts Library randomizer now works as intended
+
 ## [0.0.4] - 2019-10-20
 ### Added
  - Layout Library

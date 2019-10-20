@@ -1,6 +1,9 @@
-# DeGeo-PHP v 0.0.4
+# DeGeo-PHP v 0.0.5
 
 DeGeo PHP Libraries, Functions and Experiments.
+
+## Coming Soon
+ - More Libraries and Examples.
 
 ## Libraries
 
@@ -12,3 +15,5 @@ DeGeo PHP Libraries, Functions and Experiments.
  - Hosts: Hosts Management Library for CDN integration.
  - Layout: Layout Management for dynamic rendering of responsive containers, rows, and columns.
  - Bootstrap 4 Layout: Bootstrap 4 Layout for dynamic rendering of Bootstrap 4 containers, rows, and columns.
+
+_See CHANGELOG.md for version history_
