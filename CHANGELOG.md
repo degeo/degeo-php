@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.0.4] - 2019-10-20
+### Added
+ - Layout Library
+ - Bootstrap 4 Layout Library
+
 ## [0.0.3] - 2019-10-20
 ### Added
  - Hosts Library
