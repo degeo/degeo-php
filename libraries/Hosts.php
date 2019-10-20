@@ -4,7 +4,7 @@
  *
  * @package DeGeo-PHP
  * @since 0.0.3
- * @version 0.0.3
+ * @version 0.0.5
  */
 namespace DeGeo;
 /**
@@ -72,7 +72,10 @@ class Hosts {
 	 */
 	public function __construct()
 	{
-		$this->hosts[] = $this->host_structure;
+		$default_host = $this->host_structure;
+		$default_host['key'] = $this->active_host;
+
+		$this->hosts[ $this->active_host ] = $default_host;
 	} // function
 
 	/**
@@ -85,6 +88,11 @@ class Hosts {
 		$this->active_host = $host;
 
 		return true;
+	} // function
+
+	public function get_hosts()
+	{
+		return $this->hosts;
 	} // function
 
 	/**
@@ -126,14 +134,13 @@ class Hosts {
 			$key = $this->active_host;
 
 		if( $use_random_host === true ):
-			$total_hosts = count( $this->hosts ) - 1;
-			// rand() starts at 1 to ignore default at 0 key position
-			$key = rand( 1, $total_hosts );
+			$keys = array_keys( $this->hosts );
+			$key = $keys[mt_rand(1, count($keys) - 1)];
 			$host = $this->hosts[$key];
 		elseif( array_key_exists( $key, $this->hosts ) ):
 			$host = $this->hosts[$key];
 		else:
-			$host = $this->hosts[$this->host];
+			$host = $this->hosts[$this->active_host];
 		endif;
 
 		if( !empty( $host['domain'] ) && !empty( $host['path'] ) ):
@@ -156,9 +163,9 @@ class Hosts {
 	 * @param String $key - Host Key
 	 * @return Bool
 	 */
-	public function get_url_random( $asset_path, $key = '' )
+	public function get_url_random( $asset_path )
 	{
-		return $this->get_url( $asset_path, $key, true );
+		return $this->get_url( $asset_path, '', true );
 	} // function
 
 } // class
