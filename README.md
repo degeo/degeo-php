@@ -2,10 +2,6 @@
 
 DeGeo PHP Libraries, Functions and Experiments.
 
-## Coming Soon
-
- - Hosts Library: Hosts Management Library for CDN integration.
-
 ## Libraries
 
  - Queue: Queue and prioritize data.
@@ -13,3 +9,4 @@ DeGeo PHP Libraries, Functions and Experiments.
  - Messages Queue: Queue and prioritize Messages for rendering at a later time.
  - Breadcrumbs Queue: Queue and prioritize Breadcrumbs for rendering at a later time.
  - Metatag Queue: Queue and prioritize Metatags for rendering at a later time.
+ - Hosts Library: Hosts Management Library for CDN integration.
