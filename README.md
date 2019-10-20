@@ -1,4 +1,4 @@
-# DeGeo-PHP v 0.0.2
+# DeGeo-PHP v 0.0.3
 
 DeGeo PHP Libraries, Functions and Experiments.
 
