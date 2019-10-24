@@ -72,6 +72,25 @@ class Layout_queue extends Queue {
 		$this->data_structure[ $this->data_identifier ] = '';
 	} // function
 
+	public function add( $file, $position = '', $data = array() )
+	{
+		if( empty( $position ) )
+			$position = $this->default_position;
+
+		$layout = array(
+			'file' => $file,
+			'data' => $data,
+			'position' => $position
+		);
+
+		return $this->queue( $layout );
+	} // function
+
+	public function remove( $position )
+	{
+		return $this->unqueue( 'position', $position );
+	} // function
+
 	/**
 	 * Render
 	 * Renders the Layouts in the Queue
