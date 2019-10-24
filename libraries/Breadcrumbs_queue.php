@@ -60,4 +60,24 @@ class Breadcrumbs_queue extends Queue {
 		parent::__construct();
 	} // function
 
+	public function add( $url, $label, $active = false, $position = '' )
+	{
+		if( empty( $position ) )
+			$position = $this->default_position;
+
+		$breadcrumb = array(
+			'label' => $label,
+			'url' => $url,
+			'active' => $active,
+			'position' => $position
+		);
+
+		return $this->queue( $message );
+	} // function
+
+	public function remove( $position )
+	{
+		return $this->unqueue( 'position', $position );
+	} // function
+
 } // class
