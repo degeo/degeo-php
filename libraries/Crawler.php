@@ -95,35 +95,41 @@ class Crawler {
 			$response_information['title'] = $matches['title'];
 
 		// Meta Tag Charset
-		preg_match( '/<meta charset="(?<charset>.*?)"/', $response, $matches );
+		preg_match( '/charset="*(?<charset>.*?)"+/', $response, $matches );
 
 		if( array_key_exists( 'charset', $matches ) )
 			$response_information['charset'] = $matches['charset'];
 
-		echo '<pre>';
-		print_r( $response_information );
-		echo '</pre>';
-
 		// Meta Tags
-		$total_matches = preg_match_all( '/(<meta.*?>)/m', $response, $matches );
+		$total_metatags = preg_match_all( '/(?<tag><meta[\s].*?\/*>)/sim', $response, $matches );
 
-		print_r( $matches );
+		if( $total_metatags > 0 && array_key_exists( 1, $matches ) ):
 
-		if( $total_matches > 0 && array_key_exists( 1, $matches ) ):
+			echo '<pre>';
+			print_r($matches);
+			echo '</pre>';
 
 			$metatags = array();
 
-			foreach( $matches[1] as $metatag ):
-				$metatags[] = htmlentities( trim( $metatag ) );
-			endforeach;
+			for( $i = 0; $i < count( $matches[0] ); $i++ ):
+				if( empty( $matches[ 'name' ][ $i ] ) && empty( $matches[ 'content' ][ $i ] ) )
+					continue;
+
+				// @TODO - examine individual tags
+				preg_match_all( '/[<meta[\s]name="(?<name>.*?)"|content="(?<content>.*?)"|\/*>]/mi', $matches['tag'][ $i ], $tag_part_matches );
+
+				$name = trim( $tag_part_matches[ 'name' ][ $i ] );
+
+				$metatags[ $name ] = array(
+					'name' => $name,
+					'content' => trim( $tag_part_matches[ 'content' ][ $i ] ),
+					'tag' => trim( $matches[ 'tag' ][ $i ] )
+				);
+			endfor;
 
 			$response_information['metatags'] = $metatags;
 
 		endif;
-
-		echo '<pre>';
-		print_r( $response_information );
-		echo '</pre>';
 
 		return $response_information;
 	} // function
@@ -131,6 +137,26 @@ class Crawler {
 	public function response_links( $response )
 	{
 		$response_information = array();
+
+		// http anchors
+		$total_links = preg_match_all( '/<a[^>]*?href=(?|"([^"]*?)"|\'([^\']*?)\').*?>(.*?)<\/a>/m', $response, $matches );
+
+
+		if( $total_links > 0 && array_key_exists( 1, $matches ) ):
+
+			$links = array();
+
+			for( $i = 0; $i < count( $matches[0] ); $i++ ):
+				$response_information['urls'][] = $matches[ 1 ][ $i ];
+				$links[] = array(
+					'title' => $matches[ 2 ][ $i ],
+					'url' => $matches[ 1 ][ $i ]
+				);
+			endfor;
+
+			$response_information['anchors'] = $links;
+
+		endif;
 
 		return $response_information;
 	} // function
