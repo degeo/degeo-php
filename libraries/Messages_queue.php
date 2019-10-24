@@ -55,4 +55,23 @@ class Messages_queue extends Queue {
 		parent::__construct();
 	} // function
 
+	public function add( $type, $content, $position = '' )
+	{
+		if( empty( $position ) )
+			$position = $this->default_position;
+
+		$message = array(
+			'type' => $type,
+			'content' => $content,
+			'position' => $position
+		);
+
+		return $this->queue( $message );
+	} // function
+
+	public function remove( $position )
+	{
+		return $this->unqueue( 'position', $position );
+	} // function
+
 } // class
