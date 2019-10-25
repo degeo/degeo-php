@@ -1,13 +1,13 @@
 <?php
 /**
- * DeGeo\Breadcrumbs_queue
+ * DeGeo\Libraries\Breadcrumbs_queue
  *
  * @package DeGeo-PHP
  * @since 0.0.2
  * @version 0.0.2
  */
-namespace DeGeo;
-use \DeGeo\Queue;
+namespace DeGeo\Libraries;
+use \DeGeo\Libraries\Queue;
 /**
  * Breadcrumbs Queue
  *
@@ -60,7 +60,7 @@ class Breadcrumbs_queue extends Queue {
 		parent::__construct();
 	} // function
 
-	public function add( $url, $label, $active = false, $position = '' )
+	public function add( $url, $label, $position = '', $active = false )
 	{
 		if( empty( $position ) )
 			$position = $this->default_position;
@@ -72,7 +72,7 @@ class Breadcrumbs_queue extends Queue {
 			'position' => $position
 		);
 
-		return $this->queue( $message );
+		return $this->queue( $breadcrumb );
 	} // function
 
 	public function remove( $position )

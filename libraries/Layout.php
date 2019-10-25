@@ -1,13 +1,13 @@
 <?php
 /**
- * DeGeo\Layout
+ * DeGeo\Libraries\Layout
  *
  * @package DeGeo-PHP
  * @since 0.0.4
  * @version 0.0.4
  */
-namespace DeGeo;
-use \DeGeo\Layout_queue;
+namespace DeGeo\Libraries;
+use \DeGeo\Libraries\Layout_queue;
 /**
  * Layout
  *

@@ -1,13 +1,13 @@
 <?php
 /**
- * DeGeo\Messages_queue
+ * DeGeo\Libraries\Messages_queue
  *
  * @package DeGeo-PHP
  * @since 0.0.2
  * @version 0.0.2
  */
-namespace DeGeo;
-use \DeGeo\Queue;
+namespace DeGeo\Libraries;
+use \DeGeo\Libraries\Queue;
 /**
  * Messages Queue
  *

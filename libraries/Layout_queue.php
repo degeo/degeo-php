@@ -1,13 +1,13 @@
 <?php
 /**
- * DeGeo\Layout_queue
+ * DeGeo\Libraries\Layout_queue
  *
  * @package DeGeo-PHP
  * @since 0.0.1
  * @version 0.0.1
  */
-namespace DeGeo;
-use \DeGeo\Queue;
+namespace DeGeo\Libraries;
+use \DeGeo\Libraries\Queue;
 /**
  * Layout Queue
  *
@@ -60,6 +60,13 @@ class Layout_queue extends Queue {
 	protected $data_identifier = 'data';
 
 	/**
+	 * Position Identifier
+	 * Identifier used when rendering layouts
+	 * @var protected String
+	 */
+	protected $position_identifier = 'position';
+
+	/**
 	 * Construct
 	 * @return Void
 	 */
@@ -78,9 +85,9 @@ class Layout_queue extends Queue {
 			$position = $this->default_position;
 
 		$layout = array(
-			'file' => $file,
-			'data' => $data,
-			'position' => $position
+			$this->file_identifier => $file,
+			$this->data_identifier => $data,
+			$this->position_identifier => $position
 		);
 
 		return $this->queue( $layout );
@@ -88,7 +95,7 @@ class Layout_queue extends Queue {
 
 	public function remove( $position )
 	{
-		return $this->unqueue( 'position', $position );
+		return $this->unqueue( $this->position_identifier, $position );
 	} // function
 
 	/**
@@ -98,7 +105,7 @@ class Layout_queue extends Queue {
 	 * @param Array $data - Data to be loaded for all Layouts
 	 * @return String
 	 */
-	public function render( $echo_output = TRUE, $data = array() )
+	public function render( $data = array(), $echo_output = TRUE )
 	{
 		$this->_sort_queue();
 
@@ -138,14 +145,16 @@ class Layout_queue extends Queue {
 	 * @param Array $layout - Layout Structure to be Rendered
 	 * @return Void
 	 */
-	protected function render_layout( $layout )
+	protected function render_layout( $layout, $data = array() )
 	{
 		if( empty( $this->file_identifier ) )
 			throw new \Exception( 'File Identifier not set in ' . __CLASS__ );
 
+		$data = array_merge( $layout[ $this->data_identifier ], $data );
+
 		// Load the Data for the Layout
 		if( !empty( $this->data_identifier ) && !empty( $layout[ $this->data_identifier ] ) )
-			extract( $layout[ $this->data_identifier ] );
+			extract( $data );
 
 		// Load the File for the Layout
 		include( $layout[ $this->file_identifier ] );

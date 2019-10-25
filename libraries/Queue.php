@@ -1,12 +1,12 @@
 <?php
 /**
- * DeGeo\Queue
+ * DeGeo\Libraries\Queue
  *
  * @package DeGeo-PHP
  * @since 0.0.1
  * @version 0.0.1
  */
-namespace DeGeo;
+namespace DeGeo\Libraries;
 /**
  * Queue
  *
@@ -81,6 +81,9 @@ class Queue {
 	 */
 	public function queue( $data = array() )
 	{
+		if( !is_array( $data ) )
+			throw new \Exception( 'Invalid parameter type. Expecting Array in ' . __METHOD__ );
+
 		// Make sure the data follows the data structure
 		$data = array_merge( $this->data_structure, $data );
 
