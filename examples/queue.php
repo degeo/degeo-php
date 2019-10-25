@@ -5,7 +5,7 @@
 require_once( '../libraries/Queue.php' );
 
 // Instantiate the Library
-$example = new \DeGeo\Queue();
+$example = new \DeGeo\Libraries\Queue();
 
 // Queue data
 $example->queue( [ 'id' => 'test1', 'position' => 50 ] );

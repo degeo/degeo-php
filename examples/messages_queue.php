@@ -6,7 +6,7 @@ require_once( '../libraries/Queue.php' );
 require_once( '../libraries/Messages_queue.php' );
 
 // Instantiate the Library
-$example = new \DeGeo\Messages_queue();
+$example = new \DeGeo\Libraries\Messages_queue();
 
 // Queue data
 $example->queue( [ 'id' => 'test1', 'type' => 'warning', 'content' => 'Danger! Danger!', 'position' => 50 ] );
