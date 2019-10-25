@@ -72,7 +72,7 @@ class Layout_queue extends Queue {
 		$this->data_structure[ $this->data_identifier ] = '';
 	} // function
 
-	public function add( $file, $position = '', $data = array() )
+	public function add( $file, $position = null, $data = array() )
 	{
 		if( empty( $position ) )
 			$position = $this->default_position;
