@@ -79,7 +79,7 @@ class Metatags_queue extends Queue {
 		$output = '';
 
 		foreach( $this->queue as &$metatag ):
-			$output .= $metatag;
+			$output .= $metatag['metatag'];
 		endforeach;
 
 		if( $echo_output === TRUE )
