@@ -37,6 +37,23 @@ class Document {
 	 */
 	protected $attributes = array();
 
+	public function __construct( $title = '', $description = '', $attributes = array() )
+	{
+		if( !empty( $title ) )
+			$this->title = $title;
+
+		if( !empty( $description ) )
+			$this->description = $description;
+
+		if( !is_array( $attributes ) )
+			throw new \Exception( 'Invalid parameter type for $attributes in ' . __METHOD__ );
+
+		if( !empty( $attributes ) )
+			$this->attributes = $attributes;
+
+		return $this;
+	} // function
+
 	/**
 	 * Title
 	 * Set and Get the Document Title
