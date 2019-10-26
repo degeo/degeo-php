@@ -1,13 +1,13 @@
 <?php
 /**
- * DeGeo\Metatags_queue
+ * DeGeo\Libraries\Metatags_queue
  *
  * @package DeGeo-PHP
  * @since 0.0.2
  * @version 0.0.2
  */
-namespace DeGeo;
-use \DeGeo\Queue;
+namespace DeGeo\Libraries;
+use \DeGeo\Libraries\Queue;
 /**
  * Metatags Queue
  *
@@ -48,6 +48,24 @@ class Metatags_queue extends Queue {
 	{
 		// Ensure the core Data Structure is intact
 		parent::__construct();
+	} // function
+
+	public function add( $tag, $position = '' )
+	{
+		if( empty( $position ) )
+			$position = $this->default_position;
+
+		$metatag = array(
+			'metatag' => $tag,
+			'position' => $position
+		);
+
+		return $this->queue( $metatag );
+	} // function
+
+	public function remove( $position )
+	{
+		return $this->unqueue( 'position', $position );
 	} // function
 
 	/**

@@ -1,12 +1,12 @@
 <?php
 /**
- * DeGeo\Hosts
+ * DeGeo\Libraries\Hosts
  *
  * @package DeGeo-PHP
  * @since 0.0.3
  * @version 0.0.5
  */
-namespace DeGeo;
+namespace DeGeo\Libraries;
 /**
  * Hosts
  *

@@ -1,13 +1,13 @@
 <?php
 /**
- * DeGeo\Messages_queue
+ * DeGeo\Libraries\Messages_queue
  *
  * @package DeGeo-PHP
  * @since 0.0.2
  * @version 0.0.2
  */
-namespace DeGeo;
-use \DeGeo\Queue;
+namespace DeGeo\Libraries;
+use \DeGeo\Libraries\Queue;
 /**
  * Messages Queue
  *
@@ -53,6 +53,25 @@ class Messages_queue extends Queue {
 	{
 		// Ensure the core Data Structure is intact
 		parent::__construct();
+	} // function
+
+	public function add( $type, $content, $position = '' )
+	{
+		if( empty( $position ) )
+			$position = $this->default_position;
+
+		$message = array(
+			'type' => $type,
+			'content' => $content,
+			'position' => $position
+		);
+
+		return $this->queue( $message );
+	} // function
+
+	public function remove( $position )
+	{
+		return $this->unqueue( 'position', $position );
 	} // function
 
 } // class

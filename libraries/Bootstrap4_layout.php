@@ -1,13 +1,13 @@
 <?php
 /**
- * DeGeo\Bootstrap4_layout
+ * DeGeo\Libraries\Bootstrap4_layout
  *
  * @package DeGeo-PHP
  * @since 0.0.4
  * @version 0.0.4
  */
-namespace DeGeo;
-use \DeGeo\Layout;
+namespace DeGeo\Libraries;
+use \DeGeo\Libraries\Layout;
 /**
  * Bootstrap 4 Layout
  *

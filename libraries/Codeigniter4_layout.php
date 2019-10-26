@@ -1,21 +1,23 @@
 <?php
 /**
- * DeGeo\Libraries\Layout_queue
+ * DeGeo\Libraries\Codeigniter4_layout
  *
  * @package DeGeo-PHP
- * @since 0.0.1
- * @version 0.0.1
+ * @since 0.0.6
+ * @version 0.0.6
  */
 namespace DeGeo\Libraries;
-use \DeGeo\Libraries\Queue;
+use \DeGeo\Libraries\Bootstrap4_layout;
 /**
- * Layout Queue
+ * CodeIgniter 4 Layout
  *
  * Queue Layouts to Render at the end of data processing
+ * Allows for dynamic rendering of Bootstrap columns, rows, and columns
+ * Renders layouts using the CodeIgniter 4 view functions
  *
  * @author Jay Fortner <jay@degeo.net>
  */
-class Layout_queue extends Queue {
+class Codeigniter4_layout extends Bootstrap4_layout {
 
 	/**
 	 * Data Structure
@@ -32,7 +34,7 @@ class Layout_queue extends Queue {
 		 * File to be Loaded
 		 * @var String
 		 */
-		'file' => '',
+		'view' => '',
 		/**
 		 * Data to be Loaded
 		 * @var Array
@@ -50,53 +52,7 @@ class Layout_queue extends Queue {
 	 * Identifier used when rendering layouts
 	 * @var protected String
 	 */
-	protected $file_identifier = 'file';
-
-	/**
-	 * Data Identifier
-	 * Identifier used when rendering layouts
-	 * @var protected String
-	 */
-	protected $data_identifier = 'data';
-
-	/**
-	 * Position Identifier
-	 * Identifier used when rendering layouts
-	 * @var protected String
-	 */
-	protected $position_identifier = 'position';
-
-	/**
-	 * Construct
-	 * @return Void
-	 */
-	public function __construct()
-	{
-		// Ensure the core Data Structure is intact
-		parent::__construct();
-
-		// Ensure the Data Identifier is in the Data Structure
-		$this->data_structure[ $this->data_identifier ] = '';
-	} // function
-
-	public function add( $file, $position = null, $data = array() )
-	{
-		if( empty( $position ) )
-			$position = $this->default_position;
-
-		$layout = array(
-			$this->file_identifier => $file,
-			$this->data_identifier => $data,
-			$this->position_identifier => $position
-		);
-
-		return $this->queue( $layout );
-	} // function
-
-	public function remove( $position )
-	{
-		return $this->unqueue( $this->position_identifier, $position );
-	} // function
+	protected $file_identifier = 'view';
 
 	/**
 	 * Render
@@ -105,13 +61,12 @@ class Layout_queue extends Queue {
 	 * @param Array $data - Data to be loaded for all Layouts
 	 * @return String
 	 */
-	public function render( $data = array(), $echo_output = TRUE )
+	public function render( $data = array(), $echo_output = FALSE )
 	{
-		$this->_sort_queue();
+		if( empty( $this->queue ) )
+			return '';
 
-		// Load the Data for all Layouts
-		if( !empty( $data ) )
-			extract( $data );
+		$this->_sort_queue();
 
 		$output = '';
 
@@ -120,9 +75,7 @@ class Layout_queue extends Queue {
 			$layout = array_merge( $this->data_structure, $layout );
 
 			try{
-				ob_start();
-				echo $this->render_layout( $layout );
-				$output .= ob_get_clean();
+				$output .= $this->render_layout( $layout, $data );
 			} catch( \Exception $e ) {
 				echo $e->getMessage();
 				exit;
@@ -152,12 +105,8 @@ class Layout_queue extends Queue {
 
 		$data = array_merge( $layout[ $this->data_identifier ], $data );
 
-		// Load the Data for the Layout
-		if( !empty( $this->data_identifier ) && !empty( $layout[ $this->data_identifier ] ) )
-			extract( $data );
-
 		// Load the File for the Layout
-		include( $layout[ $this->file_identifier ] );
+		return view( $layout[ $this->file_identifier ],  $data );
 	} // function
 
 } // class
