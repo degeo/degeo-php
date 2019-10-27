@@ -24,6 +24,13 @@ class Document {
 	protected $title;
 
 	/**
+	 * Sub Title
+	 * Document Sub Title
+	 * @var protected String
+	 */
+	protected $subtitle;
+
+	/**
 	 * Description
 	 * Document Description
 	 * @var protected String
@@ -67,6 +74,21 @@ class Document {
 			$this->title = $title;
 
 		return $this->title;
+	} // function
+
+	/**
+	 * Sub Title
+	 * Set and Get the Document Sub Title
+	 *
+	 * @param String
+	 * @return String
+	 */
+	public function subtitle( $subtitle = '' )
+	{
+		if( !empty( $subtitle ) )
+			$this->subtitle = $subtitle;
+
+		return $this->subtitle;
 	} // function
 
 	/**
