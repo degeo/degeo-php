@@ -1,4 +1,4 @@
-# DeGeo-PHP v 0.0.6
+# DeGeo-PHP v 0.0.7
 
 DeGeo PHP Codebase. Libraries, Functions, Experiments and Examples.
 
@@ -22,11 +22,16 @@ _See CHANGELOG.md for version history_
  - Layout: Layout Management for dynamic rendering of responsive containers, rows, and columns.
  - Bootstrap 4 Layout: Bootstrap 4 Layout for dynamic rendering of Bootstrap 4 containers, rows, and columns.
  - CodeIgniter 4 Layout: Renders the Bootstrap 4 Layout using CodeIgniter functions.
+ - Resources Queue: Queue and prioritize resource tags for rendering in the header and footer of your document.
 
 
 ### Objects
 
  - Document Object: Stores information about documents and pages.
+
+### Modules
+
+ - Bootstrap: Views for the Bootstrap front-end framework.
 
 
 ## Examples

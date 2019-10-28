@@ -24,6 +24,13 @@ class Document {
 	protected $title;
 
 	/**
+	 * Sub Title
+	 * Document Sub Title
+	 * @var protected String
+	 */
+	protected $subtitle;
+
+	/**
 	 * Description
 	 * Document Description
 	 * @var protected String
@@ -36,6 +43,23 @@ class Document {
 	 * @var protected Array
 	 */
 	protected $attributes = array();
+
+	public function __construct( $title = '', $description = '', $attributes = array() )
+	{
+		if( !empty( $title ) )
+			$this->title = $title;
+
+		if( !empty( $description ) )
+			$this->description = $description;
+
+		if( !is_array( $attributes ) )
+			throw new \Exception( 'Invalid parameter type for $attributes in ' . __METHOD__ );
+
+		if( !empty( $attributes ) )
+			$this->attributes = $attributes;
+
+		return $this;
+	} // function
 
 	/**
 	 * Title
@@ -50,6 +74,21 @@ class Document {
 			$this->title = $title;
 
 		return $this->title;
+	} // function
+
+	/**
+	 * Sub Title
+	 * Set and Get the Document Sub Title
+	 *
+	 * @param String
+	 * @return String
+	 */
+	public function subtitle( $subtitle = '' )
+	{
+		if( !empty( $subtitle ) )
+			$this->subtitle = $subtitle;
+
+		return $this->subtitle;
 	} // function
 
 	/**

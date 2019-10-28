@@ -150,7 +150,7 @@ class Queue {
 	private function _sort_compare_position_identifier( $a, $b )
 	{
 		if( empty( $this->position_identifier ) ):
-			throw new \Exception( 'File Identifier not set in ' . __CLASS__ );
+			throw new \Exception( 'Position Identifier not set in ' . __CLASS__ );
 		endif;
 
 		return ( $a[ $this->position_identifier ] < $b[ $this->position_identifier ] ) ? 0 : 1 ;

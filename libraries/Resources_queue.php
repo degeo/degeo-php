@@ -1,6 +1,6 @@
 <?php
 /**
- * DeGeo\Libraries\Metatags_queue
+ * DeGeo\Libraries\Resources_queue
  *
  * @package DeGeo-PHP
  * @since 0.0.2
@@ -9,13 +9,14 @@
 namespace DeGeo\Libraries;
 use \DeGeo\Libraries\Queue;
 /**
- * Metatags Queue
+ * Resources Queue
  *
- * Queue Metatags to Render at the end of data processing
+ * Queue Resources to Render at the end of data processing.
+ * Resources can be rendered in the header or footer of the document.
  *
  * @author Jay Fortner <jay@degeo.net>
  */
-class Metatags_queue extends Queue {
+class Resources_queue extends Queue {
 
 	/**
 	 * Data Structure
@@ -29,10 +30,11 @@ class Metatags_queue extends Queue {
 		 */
 		'id' => '',
 		/**
-		 * Metatag
+		 * Tag
+		 * HTML Tag (script or link)
 		 * @var String
 		 */
-		'metatag' => '',
+		'tag' => '',
 		/**
 		 * Position in the Queue
 		 * @var Integer
@@ -50,17 +52,18 @@ class Metatags_queue extends Queue {
 		parent::__construct();
 	} // function
 
-	public function add( $tag, $position = '' )
+	public function add( $id, $tag, $position = '' )
 	{
 		if( empty( $position ) )
 			$position = $this->default_position;
 
-		$metatag = array(
-			'metatag' => $tag,
+		$resource = array(
+			'id' => $id,
+			'tag' => $tag,
 			'position' => $position
 		);
 
-		return $this->queue( $metatag );
+		return $this->queue( $resource );
 	} // function
 
 	public function remove( $position )
@@ -78,8 +81,8 @@ class Metatags_queue extends Queue {
 	{
 		$output = '';
 
-		foreach( $this->queue as &$metatag ):
-			$output .= $metatag['metatag'];
+		foreach( $this->queue as &$resource ):
+			$output .= $resource['tag'];
 		endforeach;
 
 		if( $echo_output === TRUE )
