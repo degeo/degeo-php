@@ -1,6 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.0.7] - 2019-10-28
+### Added
+ - Document Object construct now accepts parameters for creating a document.
+ - Document Object now has a subtitle property.
+ - Resources Queue Library.
+ - Bootstrap view files.
+### Changed
+ - Corrected Queue Library exception message thrown when missing position identifier.
+ - Corrected Metatag Queue Library array key in the render method.
+
+
 ## [0.0.6] - 2019-10-25
 ### Added
  - CodeIgniter 4 Layout Library to Render the Bootstrap 4 Layout.
